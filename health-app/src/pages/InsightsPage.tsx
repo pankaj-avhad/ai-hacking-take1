@@ -36,20 +36,21 @@ const InsightsPage = () => {
             }}
           >
             <CardContent sx={{ flexGrow: 1 }}>
-              <Typography variant="h6" gutterBottom>
-                Heart Rate Trends & Health Base Insights (Last 6 Hours)
-              </Typography>
               <Box
                 display="flex"
                 flexDirection={{ xs: "column", md: "row" }}
                 gap={3}
+                alignItems="flex-start"
               >
                 {/* Left - Graph */}
                 <Box flex={1}>
+                  <Typography variant="h6" gutterBottom>
+                    Heart Rate Trends & Health Base Insights (Last 6 Hours)
+                  </Typography>
                   <InsightsGraph />
                 </Box>
 
-                {/* Right - Bullet Points */}
+                {/* Right - Insights Card (Pulled Up) */}
                 <Card
                   sx={{
                     p: 2,
@@ -58,6 +59,7 @@ const InsightsPage = () => {
                     backgroundColor: "#E3F2FD",
                     borderLeft: "5px solid #1E88E5",
                     flex: 1,
+                    alignSelf: "flex-start", // Pulls up to align with header
                   }}
                 >
                   <CardContent>
@@ -102,15 +104,21 @@ const InsightsPage = () => {
             }}
           >
             <CardContent sx={{ flexGrow: 1 }}>
-              <Typography variant="h6" gutterBottom>
-                Last Week Heart Rate Trends & Performance Summary
-              </Typography>
               <Box
                 display="flex"
                 flexDirection={{ xs: "column", md: "row" }}
                 gap={3}
+                alignItems="flex-start"
               >
-                {/* Left - Weekly Summary */}
+                {/* Left - Weekly Trends */}
+                <Box flex={1}>
+                  <Typography variant="h6" gutterBottom>
+                    Last Week Heart Rate Trends & Performance Summary
+                  </Typography>
+                  <LastWeekGraph />
+                </Box>
+
+                {/* Right - Weekly Performance Summary Card (Pulled Up) */}
                 <Card
                   sx={{
                     p: 2,
@@ -119,9 +127,13 @@ const InsightsPage = () => {
                     backgroundColor: "#E8F5E9",
                     borderLeft: "5px solid #43A047",
                     flex: 1,
+                    alignSelf: "flex-start", // Pulls up to align with header
                   }}
                 >
                   <CardContent>
+                    <Typography variant="h6">
+                      Weekly Performance Summary
+                    </Typography>
                     <List>
                       <ListItem>
                         <ListItemText primary="✅ Achievements: Maintained average heart rate below 80 bpm" />
@@ -144,11 +156,6 @@ const InsightsPage = () => {
                     </List>
                   </CardContent>
                 </Card>
-
-                {/* Right - Graph */}
-                <Box flex={1}>
-                  <LastWeekGraph />
-                </Box>
               </Box>
             </CardContent>
           </Card>
