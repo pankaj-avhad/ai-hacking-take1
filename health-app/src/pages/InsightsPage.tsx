@@ -127,7 +127,7 @@ const InsightsPage = () => {
       </Grid>
 
       {/* Navigation Button */}
-      <Box textAlign="center" mt={6}>
+      <Box textAlign="center" mt={8}>
         <Button
           variant="contained"
           color="primary"
