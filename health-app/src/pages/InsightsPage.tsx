@@ -22,22 +22,9 @@ const InsightsPage = () => {
         Insights
       </Typography>
 
-      {/* Insights Graph (Left) | Card (Right) */}
+      {/* Combined: Insights Graph + Health Base Insights */}
       <Grid container spacing={3} alignItems="stretch">
-        {/* Left - Graph Inside a Card */}
-        <Grid item xs={12} md={6}>
-          <Card sx={{ p: 2, boxShadow: 3, borderRadius: 2, height: "100%" }}>
-            <CardContent>
-              <Typography variant="h6" gutterBottom>
-                Heart Rate Trends (Last 6 Hours)
-              </Typography>
-              <InsightsGraph />
-            </CardContent>
-          </Card>
-        </Grid>
-
-        {/* Right - Bullet Points Inside a Card */}
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12}>
           <Card
             sx={{
               p: 2,
@@ -49,34 +36,61 @@ const InsightsPage = () => {
             }}
           >
             <CardContent sx={{ flexGrow: 1 }}>
-              <Typography variant="h6">Base Health Insights</Typography>
-              <List>
-                {[
-                  "Your average heart rate is stable.",
-                  "Nighttime heart rate is slightly elevated.",
-                  "Good recovery after workouts.",
-                  "Heart rate spikes detected during stress.",
-                  "No abnormal rhythms detected.",
-                  "Consistent resting heart rate.",
-                  "You have maintained healthy activity levels.",
-                  "Deep sleep phases improving.",
-                  "Hydration may impact heart rate variations.",
-                  "Keep monitoring for any irregular patterns.",
-                ].map((point, index) => (
-                  <ListItem key={index}>
-                    <ListItemText primary={`• ${point}`} />
-                  </ListItem>
-                ))}
-              </List>
+              <Typography variant="h6" gutterBottom>
+                Heart Rate Trends & Health Base Insights (Last 6 Hours)
+              </Typography>
+              <Box
+                display="flex"
+                flexDirection={{ xs: "column", md: "row" }}
+                gap={3}
+              >
+                {/* Left - Graph */}
+                <Box flex={1}>
+                  <InsightsGraph />
+                </Box>
+
+                {/* Right - Bullet Points */}
+                <Card
+                  sx={{
+                    p: 2,
+                    boxShadow: 2,
+                    borderRadius: 2,
+                    backgroundColor: "#E3F2FD",
+                    borderLeft: "5px solid #1E88E5",
+                    flex: 1,
+                  }}
+                >
+                  <CardContent>
+                    <Typography variant="h6">Health Base Insights</Typography>
+                    <List>
+                      {[
+                        "Your average heart rate is stable.",
+                        "Nighttime heart rate is slightly elevated.",
+                        "Good recovery after workouts.",
+                        "Heart rate spikes detected during stress.",
+                        "No abnormal rhythms detected.",
+                        "Consistent resting heart rate.",
+                        "You have maintained healthy activity levels.",
+                        "Deep sleep phases improving.",
+                        "Hydration may impact heart rate variations.",
+                        "Keep monitoring for any irregular patterns.",
+                      ].map((point, index) => (
+                        <ListItem key={index}>
+                          <ListItemText primary={`• ${point}`} />
+                        </ListItem>
+                      ))}
+                    </List>
+                  </CardContent>
+                </Card>
+              </Box>
             </CardContent>
           </Card>
         </Grid>
       </Grid>
 
-      {/* Last Week Graph (Right) | Card (Left) */}
+      {/* Combined: Last Week Heart Rate Trends & Weekly Performance Summary */}
       <Grid container spacing={3} alignItems="stretch" mt={4}>
-        {/* Left - Weekly Summary Card */}
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12}>
           <Card
             sx={{
               p: 2,
@@ -88,39 +102,54 @@ const InsightsPage = () => {
             }}
           >
             <CardContent sx={{ flexGrow: 1 }}>
-              <Typography variant="h6">Weekly Performance Summary</Typography>
-              <List>
-                <ListItem>
-                  <ListItemText primary="✅ Achievements: Maintained average heart rate below 80 bpm" />
-                </ListItem>
-                <ListItem>
-                  <ListItemText primary="✅ Improved recovery time after exercise" />
-                </ListItem>
-                <ListItem>
-                  <ListItemText primary="✅ Reduced stress spikes by 15%" />
-                </ListItem>
-                <ListItem>
-                  <ListItemText primary="❌ Missed: Lowering evening heart rate" />
-                </ListItem>
-                <ListItem>
-                  <ListItemText primary="❌ Need more consistency in workout patterns" />
-                </ListItem>
-                <ListItem>
-                  <ListItemText primary="❌ Sleep cycle fluctuations detected" />
-                </ListItem>
-              </List>
-            </CardContent>
-          </Card>
-        </Grid>
-
-        {/* Right - Last Week Graph Inside a Card */}
-        <Grid item xs={12} md={6}>
-          <Card sx={{ p: 2, boxShadow: 3, borderRadius: 2, height: "100%" }}>
-            <CardContent>
               <Typography variant="h6" gutterBottom>
-                Last Week Heart Rate Analysis
+                Last Week Heart Rate Trends & Performance Summary
               </Typography>
-              <LastWeekGraph />
+              <Box
+                display="flex"
+                flexDirection={{ xs: "column", md: "row" }}
+                gap={3}
+              >
+                {/* Left - Weekly Summary */}
+                <Card
+                  sx={{
+                    p: 2,
+                    boxShadow: 2,
+                    borderRadius: 2,
+                    backgroundColor: "#E8F5E9",
+                    borderLeft: "5px solid #43A047",
+                    flex: 1,
+                  }}
+                >
+                  <CardContent>
+                    <List>
+                      <ListItem>
+                        <ListItemText primary="✅ Achievements: Maintained average heart rate below 80 bpm" />
+                      </ListItem>
+                      <ListItem>
+                        <ListItemText primary="✅ Improved recovery time after exercise" />
+                      </ListItem>
+                      <ListItem>
+                        <ListItemText primary="✅ Reduced stress spikes by 15%" />
+                      </ListItem>
+                      <ListItem>
+                        <ListItemText primary="❌ Missed: Lowering evening heart rate" />
+                      </ListItem>
+                      <ListItem>
+                        <ListItemText primary="❌ Need more consistency in workout patterns" />
+                      </ListItem>
+                      <ListItem>
+                        <ListItemText primary="❌ Sleep cycle fluctuations detected" />
+                      </ListItem>
+                    </List>
+                  </CardContent>
+                </Card>
+
+                {/* Right - Graph */}
+                <Box flex={1}>
+                  <LastWeekGraph />
+                </Box>
+              </Box>
             </CardContent>
           </Card>
         </Grid>

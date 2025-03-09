@@ -15,10 +15,10 @@ import WatchIcon from "@mui/icons-material/Watch"; // Generic for Garmin
 import RingVolumeIcon from "@mui/icons-material/RingVolume"; // For Ring
 import AccessTimeIcon from "@mui/icons-material/AccessTime"; // Clock Icon for Coming Soon
 import CheckCircleIcon from "@mui/icons-material/CheckCircle"; // ✅ CHECK ICON
-import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked"; // ⭕️ EMPTY CIRCLE ICON
+import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank"; // ⬜ EMPTY CHECKBOX
 
 const HomePage = () => {
-  const [selectedDevice, setSelectedDevice] = useState<string | null>(null);
+  const [selectedDevices, setSelectedDevices] = useState<string[]>([]);
   const [labMode, setLabMode] = useState(false);
   const navigate = useNavigate();
 
@@ -32,6 +32,16 @@ const HomePage = () => {
       color: "#E8F5E9",
     }, // Softer Light Green
   ];
+
+  // Handle device selection (toggle)
+  const toggleDeviceSelection = (deviceName: string) => {
+    setSelectedDevices(
+      (prev) =>
+        prev.includes(deviceName)
+          ? prev.filter((device) => device !== deviceName) // Remove if already selected
+          : [...prev, deviceName] // Add if not selected
+    );
+  };
 
   return (
     <Box
@@ -71,11 +81,11 @@ const HomePage = () => {
                   </Typography>
                 </Box>
               </CardContent>
-              {/* Circular Checkbox with Check Icon */}
+              {/* Circular Checkbox for Multi-Select */}
               <Checkbox
-                checked={selectedDevice === device.name}
-                onChange={() => setSelectedDevice(device.name)}
-                icon={<RadioButtonUncheckedIcon fontSize="large" />} // Empty Circle
+                checked={selectedDevices.includes(device.name)}
+                onChange={() => toggleDeviceSelection(device.name)}
+                icon={<CheckBoxOutlineBlankIcon fontSize="large" />} // Empty Checkbox
                 checkedIcon={
                   <CheckCircleIcon fontSize="large" sx={{ color: "green" }} />
                 } // Green Checkmark
@@ -83,7 +93,6 @@ const HomePage = () => {
                   position: "absolute",
                   top: 10,
                   right: 10,
-                  "&.Mui-checked": { color: "green" },
                 }}
               />
             </Card>
@@ -136,10 +145,12 @@ const HomePage = () => {
             py: 1.5,
             fontSize: "1rem",
             borderRadius: 2,
-            backgroundColor: selectedDevice ? "#007FFF" : "#ccc", // Disabled state color
-            "&:hover": { backgroundColor: selectedDevice ? "#005BBB" : "#aaa" },
+            backgroundColor: selectedDevices.length > 0 ? "#007FFF" : "#ccc", // Disabled state color
+            "&:hover": {
+              backgroundColor: selectedDevices.length > 0 ? "#005BBB" : "#aaa",
+            },
           }}
-          disabled={!selectedDevice} // Disable button until a device is selected
+          disabled={selectedDevices.length === 0} // Disable button if no device is selected
         >
           Go to Insights
         </Button>

@@ -19,10 +19,7 @@ const data = [
 const InsightsGraph: React.FC = () => {
   return (
     <Box p={3}>
-      <Typography variant="h6" gutterBottom>
-        Health Base - Heart Rate Insights
-      </Typography>
-      <ResponsiveContainer width="100%" height={300}>
+      <ResponsiveContainer width="100%" height={500}>
         <LineChart data={data}>
           <XAxis dataKey="time" />
           <YAxis domain={[70, 85]} />
